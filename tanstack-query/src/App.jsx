@@ -53,6 +53,17 @@ function App() {
         },
     });
 
+    const deleteTodo = async (todo) => {
+        await axios.delete(`${BASE_URL}/${todo.id}`);
+    };
+
+    const { mutate: deleteMutate } = useMutation({
+        mutationFn: deleteTodo,
+        onSuccess: () => {
+            queryClient.invalidateQueries(['todos']);
+        },
+    });
+
     if (isPending) return <div>로딩중...</div>;
     if (isError) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
 
@@ -68,9 +79,17 @@ function App() {
                 <button>추가</button>
             </form>
 
-            <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', width: '300px' }}>
+            <ul
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'start',
+                    width: '100%',
+                    gap: '10px',
+                }}
+            >
                 {todos.map((todo) => (
-                    <div key={todo.id}>
+                    <div key={todo.id} style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                         <li
                             onClick={() => toggleMutate(todo)}
                             style={{
@@ -95,6 +114,8 @@ function App() {
                                 {todo.completed ? '완료' : '진행중'}
                             </span>
                         </li>
+
+                        <button onClick={() => deleteMutate(todo)}>삭제</button>
                     </div>
                 ))}
             </ul>
