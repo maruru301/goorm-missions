@@ -1,0 +1,43 @@
+.todo-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    gap: 10px;
+}
+
+.todo-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.todo-title.completed {
+    text-decoration: line-through;
+}
+
+.todo-title.in-progress {
+    text-decoration: none;
+}
+
+.completed-badge {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
+.completed-badge.completed {
+    background-color: #d1f2eb;
+    color: #1e8449;
+}
+
+.completed-badge.in-progress {
+    background-color: #fadbd8;
+    color: #c0392b;
+}
