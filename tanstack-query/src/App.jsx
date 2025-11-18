@@ -30,11 +30,26 @@ function App() {
         return res.data;
     };
 
-    const { mutate } = useMutation({
+    const { mutate: addMutate } = useMutation({
         mutationFn: addTodo,
         onSuccess: () => {
             queryClient.invalidateQueries(['todos']); // refetching
             setTodo('');
+        },
+    });
+
+    const toggleTodo = async (todo) => {
+        const res = await axios.patch(`${BASE_URL}/${todo.id}`, {
+            completed: !todo.completed,
+        });
+
+        return res.data;
+    };
+
+    const { mutate: toggleMutate } = useMutation({
+        mutationFn: toggleTodo,
+        onSuccess: () => {
+            queryClient.invalidateQueries(['todos']);
         },
     });
 
@@ -46,16 +61,41 @@ function App() {
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    mutate({ title: todo, completed: false });
+                    addMutate({ title: todo, completed: false });
                 }}
             >
                 <input value={todo} onChange={(e) => setTodo(e.target.value)} type="text" />
                 <button>추가</button>
             </form>
 
-            <ul>
+            <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', width: '300px' }}>
                 {todos.map((todo) => (
-                    <li key={todo.id}>{todo.title}</li>
+                    <div key={todo.id}>
+                        <li
+                            onClick={() => toggleMutate(todo)}
+                            style={{
+                                cursor: 'pointer',
+                                padding: '8px 12px',
+                                borderRadius: '6px',
+                            }}
+                        >
+                            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+                                {todo.title}
+                            </span>
+                            <span
+                                style={{
+                                    fontSize: '13px',
+                                    padding: '2px 6px',
+                                    borderRadius: '8px',
+                                    marginLeft: '10px',
+                                    backgroundColor: todo.completed ? '#D1F2EB' : '#FADBD8',
+                                    color: todo.completed ? '#1E8449' : '#C0392B',
+                                }}
+                            >
+                                {todo.completed ? '완료' : '진행중'}
+                            </span>
+                        </li>
+                    </div>
                 ))}
             </ul>
         </div>
