@@ -29,7 +29,7 @@ const Todos = () => {
             const completed = todos.filter((todo) => todo.completed);
             const pending = todos.filter((todo) => !todo.completed);
 
-            return { all: [...pending, ...completed], completed, pending };
+            return { all: todos, completed, pending };
         },
     });
 
