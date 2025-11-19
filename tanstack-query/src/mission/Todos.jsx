@@ -33,7 +33,7 @@ const Todos = () => {
                 all: todos,
                 pending,
                 completed,
-                counts: { all: todos.length, pending: pending.length, completed: completed.length },
+                counts: { allCount: todos.length, pendingCount: pending.length, completedCount: completed.length },
             };
         },
     });
@@ -86,7 +86,7 @@ const Todos = () => {
         completed: todosData.completed,
     };
 
-    const { all: allCount, pending: pendingCount, completed: completedCount } = todosData.counts;
+    const { allCount, pendingCount, completedCount } = todosData.counts;
 
     return (
         <div className="todos">
