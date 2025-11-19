@@ -94,9 +94,9 @@ const Todos = () => {
             </form>
 
             <div className="tab">
-                <button onClick={() => setActiveTab('all')}>전체</button>
-                <button onClick={() => setActiveTab('pending')}>할 일</button>
-                <button onClick={() => setActiveTab('completed')}>완료</button>
+                <button onClick={() => setActiveTab('all')}>전체 ({todosMap.all.length})</button>
+                <button onClick={() => setActiveTab('pending')}>할 일 ({todosMap.pending.length})</button>
+                <button onClick={() => setActiveTab('completed')}>완료 ({todosMap.completed.length})</button>
             </div>
 
             <ul className="todo-list-container">
