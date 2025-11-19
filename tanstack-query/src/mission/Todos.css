@@ -1,3 +1,9 @@
+.todos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .todo-list-container {
     display: flex;
     flex-direction: column;
@@ -40,4 +46,33 @@
 .completed-badge.in-progress {
     background-color: #fadbd8;
     color: #c0392b;
+}
+
+.tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.tab button {
+    flex: 1;
+    padding: 8px 10px;
+    background-color: inherit;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.tab button:hover {
+    background-color: #353535;
+}
+
+.tab button.active {
+    border-bottom: 2px solid #3b82f6;
+    outline: none;
+    color: #3b82f6;
+    font-weight: 600;
 }

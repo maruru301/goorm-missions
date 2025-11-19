@@ -82,7 +82,7 @@ const Todos = () => {
     };
 
     return (
-        <div>
+        <div className="todos">
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -94,9 +94,15 @@ const Todos = () => {
             </form>
 
             <div className="tab">
-                <button onClick={() => setActiveTab('all')}>전체 ({todosMap.all.length})</button>
-                <button onClick={() => setActiveTab('pending')}>할 일 ({todosMap.pending.length})</button>
-                <button onClick={() => setActiveTab('completed')}>완료 ({todosMap.completed.length})</button>
+                <button className={activeTab === 'all' ? 'active' : ''} onClick={() => setActiveTab('all')}>
+                    전체 ({todosMap.all.length})
+                </button>
+                <button className={activeTab === 'pending' ? 'active' : ''} onClick={() => setActiveTab('pending')}>
+                    할 일 ({todosMap.pending.length})
+                </button>
+                <button className={activeTab === 'completed' ? 'active' : ''} onClick={() => setActiveTab('completed')}>
+                    완료 ({todosMap.completed.length})
+                </button>
             </div>
 
             <ul className="todo-list-container">
