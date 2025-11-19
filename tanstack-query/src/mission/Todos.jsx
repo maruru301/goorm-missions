@@ -8,8 +8,10 @@ import { useState } from 'react';
 const BASE_URL = 'http://localhost:4000/todos';
 
 const Todos = () => {
-    const [todo, setTodo] = useState('');
     const queryClient = useQueryClient();
+
+    const [todo, setTodo] = useState('');
+    const [activeTab, setActiveTab] = useState('all');
 
     const fetchTodos = async () => {
         const res = await axios.get(BASE_URL);
@@ -17,12 +19,18 @@ const Todos = () => {
     };
 
     const {
-        data: todos,
+        data: todosData,
         isPending,
         isError,
     } = useQuery({
         queryKey: ['todos'],
         queryFn: fetchTodos,
+        select: (todos) => {
+            const completed = todos.filter((todo) => todo.completed);
+            const pending = todos.filter((todo) => !todo.completed);
+
+            return { all: [...pending, ...completed], completed, pending };
+        },
     });
 
     const addTodo = async (newTodo) => {
@@ -67,6 +75,12 @@ const Todos = () => {
     if (isPending) return <div>로딩중...</div>;
     if (isError) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
 
+    const todosMap = {
+        all: todosData.all,
+        pending: todosData.pending,
+        completed: todosData.completed,
+    };
+
     return (
         <div>
             <form
@@ -79,8 +93,14 @@ const Todos = () => {
                 <button>추가</button>
             </form>
 
+            <div className="tab">
+                <button onClick={() => setActiveTab('all')}>전체</button>
+                <button onClick={() => setActiveTab('pending')}>할 일</button>
+                <button onClick={() => setActiveTab('completed')}>완료</button>
+            </div>
+
             <ul className="todo-list-container">
-                {todos.map((todo) => (
+                {todosMap[activeTab].map((todo) => (
                     <div key={todo.id} className="todo-list">
                         <li onClick={() => toggleMutate(todo)} className="todo-item">
                             <span className={`todo-title ${todo.completed ? 'completed' : 'in-progress'}`}>
