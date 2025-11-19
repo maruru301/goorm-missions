@@ -29,7 +29,12 @@ const Todos = () => {
             const completed = todos.filter((todo) => todo.completed);
             const pending = todos.filter((todo) => !todo.completed);
 
-            return { all: todos, completed, pending };
+            return {
+                all: todos,
+                pending,
+                completed,
+                counts: { all: todos.length, pending: pending.length, completed: completed.length },
+            };
         },
     });
 
@@ -81,6 +86,8 @@ const Todos = () => {
         completed: todosData.completed,
     };
 
+    const { all: allCount, pending: pendingCount, completed: completedCount } = todosData.counts;
+
     return (
         <div className="todos">
             <form
@@ -95,13 +102,13 @@ const Todos = () => {
 
             <div className="tab">
                 <button className={activeTab === 'all' ? 'active' : ''} onClick={() => setActiveTab('all')}>
-                    전체 ({todosMap.all.length})
+                    전체 ({allCount})
                 </button>
                 <button className={activeTab === 'pending' ? 'active' : ''} onClick={() => setActiveTab('pending')}>
-                    할 일 ({todosMap.pending.length})
+                    할 일 ({pendingCount})
                 </button>
                 <button className={activeTab === 'completed' ? 'active' : ''} onClick={() => setActiveTab('completed')}>
-                    완료 ({todosMap.completed.length})
+                    완료 ({completedCount})
                 </button>
             </div>
 
