@@ -46,20 +46,36 @@ async function fetchJson<T>(url: string): Promise<T> {
 }
 
 const getPosts = async () => {
-    const posts = await fetchJson<Post[]>('https://jsonplaceholder.typicode.com/posts');
+    try {
+        const posts = await fetchJson<Post[]>('https://jsonplaceholder.typicode.com/posts');
 
-    console.log('=====모든 Posts 가져오기=====');
-    posts.forEach((post) => {
-        console.log(post);
-    });
+        console.log('=====모든 Posts 가져오기=====');
+        posts.forEach((post) => {
+            console.log(post);
+        });
+    } catch (error) {
+        console.error('posts 가져오기 실패', error);
+    }
 };
 
 const getUser = async () => {
-    const user = await fetchJson<User>('https://jsonplaceholder.typicode.com/users/1');
+    try {
+        const user = await fetchJson<User>('https://jsonplaceholder.typicode.com/users/1');
 
-    console.log('=====User1 가져오기=====');
-    console.log(user);
+        console.log('=====User1 가져오기=====');
+        console.log(user);
+    } catch (error) {
+        console.error('user 가져오기 실패', error);
+    }
 };
 
-getPosts();
-getUser();
+const run = async () => {
+    try {
+        await getPosts();
+        await getUser();
+    } catch (error) {
+        console.error('데이터 가져오기 실패', error);
+    }
+};
+
+run();
