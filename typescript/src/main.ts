@@ -36,3 +36,11 @@ type Post = {
     title: string;
     body: string;
 };
+
+async function fetchJson<T>(url: string): Promise<T> {
+    // TODO: fetch 호출 후 응답을 T 타입으로 반환하기
+    const res = await fetch(url);
+    const data: T = await res.json();
+
+    return data;
+}
