@@ -44,3 +44,22 @@ async function fetchJson<T>(url: string): Promise<T> {
 
     return data;
 }
+
+const getPosts = async () => {
+    const posts = await fetchJson<Post[]>('https://jsonplaceholder.typicode.com/posts');
+
+    console.log('=====모든 Posts 가져오기=====');
+    posts.forEach((post) => {
+        console.log(post);
+    });
+};
+
+const getUser = async () => {
+    const user = await fetchJson<User>('https://jsonplaceholder.typicode.com/users/1');
+
+    console.log('=====User1 가져오기=====');
+    console.log(user);
+};
+
+getPosts();
+getUser();
