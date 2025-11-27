@@ -57,6 +57,9 @@ async function fetchJson<T>(url: string): Promise<T> {
     return data;
 }
 
+type PostsReturnType = ReturnType<typeof fetchJson<Post[]>>; // Promise<Post[]>
+type PostsDataType = Awaited<PostsReturnType>; // Post[]
+
 const getPosts = async () => {
     try {
         const posts = await fetchJson<Post[]>('https://jsonplaceholder.typicode.com/posts');
