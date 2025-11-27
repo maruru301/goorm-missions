@@ -1,5 +1,4 @@
 // 미션 파일
-
 type Geo = {
     lat: string;
     lng: string;
@@ -52,7 +51,12 @@ type ReadonlyPost = Readonly<Post>;
 async function fetchJson<T>(url: string): Promise<T> {
     // TODO: fetch 호출 후 응답을 T 타입으로 반환하기
     const res = await fetch(url);
-    const data: T = await res.json();
+
+    if (!res.ok) {
+        throw new Error(`서버 응답 실패: ${res.status}`);
+    }
+
+    const data = (await res.json()) as T;
 
     return data;
 }
