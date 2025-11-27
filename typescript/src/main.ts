@@ -81,6 +81,7 @@ const getUser = async () => {
     }
 };
 
+// API 요청 실행 후 로그 출력
 const run = async () => {
     try {
         await getPosts();
@@ -90,4 +91,38 @@ const run = async () => {
     }
 };
 
-run();
+// 유틸리티로 만든 타입 확인
+const testPostTypes = async () => {
+    try {
+        const posts = await fetchJson<Post[]>('https://jsonplaceholder.typicode.com/posts');
+
+        // PostSummary
+        const postSummary: PostSummary = {
+            id: posts[0].id,
+            title: posts[0].title,
+        };
+        console.log('===PostSummary===');
+        console.log(postSummary);
+
+        // ReadonlyPost
+        const readonlyPost: ReadonlyPost = posts[0];
+        console.log('===ReadonlyPost===');
+        console.log(readonlyPost);
+        // 수정 시 오류 발생 확인
+        // readonlyPost.title = '안녕';
+
+        // UpdatePostDto
+        const updatePost: UpdatePostDto = {
+            title: '타이틀',
+            body: '바디',
+            // id: 1,
+        };
+        console.log('===UpdatePostDto===');
+        console.log(updatePost);
+    } catch (error) {
+        console.error('testPostTypes 실행 실패', error);
+    }
+};
+
+// run();
+testPostTypes();
