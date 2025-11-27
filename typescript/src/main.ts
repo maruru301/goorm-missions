@@ -37,6 +37,18 @@ type Post = {
     body: string;
 };
 
+// 1.  id, title만 포함
+type PostSummary = Pick<Post, 'id' | 'title'>;
+
+// 2. Post에서 id 제외
+type CreatePostDto = Omit<Post, 'id'>;
+
+// 3. title, body만 선택적
+type UpdatePostDto = Partial<Pick<Post, 'title' | 'body'>>;
+
+// 4. Post 필드를 모두 읽기 전용
+type ReadonlyPost = Readonly<Post>;
+
 async function fetchJson<T>(url: string): Promise<T> {
     // TODO: fetch 호출 후 응답을 T 타입으로 반환하기
     const res = await fetch(url);
