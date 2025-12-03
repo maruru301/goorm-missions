@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 
 import { Book } from '@/types/book';
+import Link from 'next/link';
 
 const CartPage = () => {
     const [cartList, setCartList] = useState<Book[]>([]);
@@ -34,7 +35,11 @@ const CartPage = () => {
                     {cartList.map((item) => (
                         <li key={item.id} className="border p-6 flex justify-between">
                             <div>
-                                <h3 className="text-lg font-semibold">{item.title}</h3>
+                                <Link href={`/books/${item.id}`}>
+                                    <h3 className="text-lg font-semibold hover:underline cursor-pointer">
+                                        {item.title}
+                                    </h3>
+                                </Link>
                                 <p className="text-sm text-gray-500">{item.author}</p>
                             </div>
 
