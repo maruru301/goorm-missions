@@ -46,9 +46,7 @@ const page = async ({ params }: Params) => {
                     </div>
 
                     <div className="mt-4 flex flex-col gap-2">
-                        <p className="mt-2 font-semibold">
-                            {book.price.amount} {book.price.currencyCode}
-                        </p>
+                        <p className="mt-2 font-semibold">{Number(book.price.amount).toLocaleString()}원</p>
 
                         <div className="flex flex-wrap gap-2 mt-2">
                             {book.tags.map((tag) => (
