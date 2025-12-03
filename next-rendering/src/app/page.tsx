@@ -1,5 +1,6 @@
 // 메인 홈 (SSG)
 
+import { FaListUl } from 'react-icons/fa';
 import Link from 'next/link';
 
 export default function Home() {
@@ -10,7 +11,11 @@ export default function Home() {
 
             <nav>
                 <Link href="/books">
-                    <button className="bg-blue-500 px-4 py-1 rounded hover:bg-blue-600 text-sm">책 목록 보기</button>
+                    <button className="font-medium text-sm text-white px-3 py-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer">
+                        <div className="flex items-center justify-center gap-2">
+                            <FaListUl />책 목록 보기
+                        </div>
+                    </button>
                 </Link>
             </nav>
         </div>

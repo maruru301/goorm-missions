@@ -3,6 +3,7 @@
 import { Book } from '@/types/book';
 import CartButton from '@/components/CartButton';
 import Link from 'next/link';
+import { MdInfoOutline } from 'react-icons/md';
 
 const page = async () => {
     const res = await fetch('http://localhost:4000/books', {
@@ -12,7 +13,7 @@ const page = async () => {
 
     return (
         <div className="p-20">
-            <h2 className="text-3xl font-bold mb-6">책 목록</h2>
+            <h2 className="text-3xl font-bold mb-6">📚 책 목록</h2>
 
             <div className="flex flex-col gap-8">
                 {books.map((book) => (
@@ -42,8 +43,11 @@ const page = async () => {
                                 <CartButton book={book} />
 
                                 <Link href={`/books/${book.id}`}>
-                                    <button className="font-medium text-sm text-white px-3 py-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors">
-                                        자세히 보기
+                                    <button className="font-medium text-sm text-white px-3 py-2 rounded bg-neutral-500 hover:bg-neutral-600 transition-colors cursor-pointer">
+                                        <div className="flex items-center justify-center gap-2">
+                                            <MdInfoOutline className="w-4 h-4" />
+                                            자세히 보기
+                                        </div>
                                     </button>
                                 </Link>
                             </div>

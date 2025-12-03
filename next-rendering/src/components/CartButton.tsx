@@ -1,6 +1,7 @@
 'use client';
 
 import { Book } from '@/types/book';
+import { BsCartPlus } from 'react-icons/bs';
 
 type Props = {
     book: Book;
@@ -33,10 +34,13 @@ const CartButton = ({ book }: Props) => {
 
     return (
         <button
-            className="font-medium text-sm text-white px-3 py-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors"
+            className="font-medium text-sm text-white px-3 py-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer"
             onClick={addToCart}
         >
-            장바구니 담기
+            <div className="flex items-center justify-center gap-2">
+                <BsCartPlus className="w-4 h-4" />
+                장바구니 담기
+            </div>
         </button>
     );
 };
