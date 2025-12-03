@@ -14,6 +14,11 @@ export const NavBar = () => {
                         책 목록
                     </Link>
                 </li>
+                <li>
+                    <Link href="/cart" className="hover:text-gray-200">
+                        장바구니
+                    </Link>
+                </li>
             </ul>
         </nav>
     );
