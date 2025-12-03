@@ -24,6 +24,24 @@ const CartPage = () => {
         fetchCart();
     }, []);
 
+    // 삭제
+    const handleDelete = async (id: number) => {
+        const confirm = window.confirm('삭제하시겠습니까?');
+        if (!confirm) return;
+
+        try {
+            const res = await fetch(`http://localhost:4000/cart/${id}`, {
+                method: 'DELETE',
+            });
+            if (!res.ok) throw new Error('삭제 실패');
+
+            // 상태에서도 바로 제거
+            setCartList((prev) => prev.filter((item) => item.id !== id));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div className="p-20">
             <h2 className="text-3xl font-bold mb-6">🛒 장바구니</h2>
@@ -45,7 +63,10 @@ const CartPage = () => {
 
                             <div className="flex gap-4 items-center">
                                 <span>{item.price.amount}원</span>
-                                <button className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors">
+                                <button
+                                    onClick={() => handleDelete(item.id)}
+                                    className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors cursor-pointer"
+                                >
                                     삭제
                                 </button>
                             </div>
