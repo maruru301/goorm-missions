@@ -1,9 +1,13 @@
 // 책 상세 페이지 (SSR)
 
-import React from 'react';
+type Params = {
+    params: Promise<{ id: number }>;
+};
 
-const page = () => {
-    return <div>책 상세 정보</div>;
+const page = async ({ params }: Params) => {
+    const { id } = await params;
+
+    return <div>책 상세 정보 ({id})</div>;
 };
 
 export default page;

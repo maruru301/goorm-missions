@@ -1,6 +1,7 @@
 // 책 목록 페이지 (ISR)
 
 import { Book } from '@/types/book';
+import Link from 'next/link';
 
 const page = async () => {
     const res = await fetch('http://localhost:4000/books', {
@@ -23,6 +24,10 @@ const page = async () => {
                                 <p>{book.author}</p>
                                 <p>{book.description}</p>
                             </div>
+
+                            <Link href={`/books/${book.id}`}>
+                                <button>자세히 보기</button>
+                            </Link>
                         </div>
                     </div>
                 ))}
