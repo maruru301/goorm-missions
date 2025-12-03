@@ -1,6 +1,7 @@
 // 책 목록 페이지 (ISR)
 
 import { Book } from '@/types/book';
+import CartButton from '@/components/CartButton';
 import Link from 'next/link';
 
 const page = async () => {
@@ -10,34 +11,38 @@ const page = async () => {
     const books: Book[] = await res.json();
 
     return (
-        <div className="p-8">
+        <div className="p-20">
             <h2 className="text-3xl font-bold mb-6">책 목록</h2>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-8">
                 {books.map((book) => (
-                    <div key={book.id} className="border flex gap-4">
+                    <div key={book.id} className="border flex gap-6 p-4">
                         <img src={book.coverImage} alt={book.title} width={200} />
 
-                        <div className="pt-4">
-                            <div className="flex items-center gap-2">
-                                <h1 className="text-2xl font-bold">{book.title}</h1>
+                        <div className="flex flex-col justify-between py-4">
+                            <div>
+                                <div className="flex items-center gap-2 mb-2">
+                                    <h1 className="text-2xl font-bold">{book.title}</h1>
 
-                                <div>
-                                    {book.isNew && (
-                                        <span className="bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded-full">
-                                            신간
-                                        </span>
-                                    )}
+                                    <div>
+                                        {book.isNew && (
+                                            <span className="bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded-full">
+                                                신간
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
+
+                                <p className="text-gray-400">{book.author}</p>
+                                <p className="text-yellow-500 mb-4">★ {book.rating}</p>
+                                <p>{book.description}</p>
                             </div>
 
-                            <p className="text-gray-400">{book.author}</p>
-                            <p className="mb-4">{book.description}</p>
-                            <p className="text-yellow-500">★ {book.rating}</p>
+                            <div className="flex gap-2">
+                                <CartButton book={book} />
 
-                            <div>
                                 <Link href={`/books/${book.id}`}>
-                                    <button className="bg-blue-500 px-4 py-1 rounded hover:bg-blue-600 text-sm">
+                                    <button className="font-medium text-sm text-white px-3 py-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors">
                                         자세히 보기
                                     </button>
                                 </Link>
