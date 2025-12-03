@@ -2,6 +2,7 @@
 
 import { Book } from '@/types/book';
 import CartButton from '@/components/CartButton';
+import { notFound } from 'next/navigation';
 
 type Params = {
     params: Promise<{ id: string }>;
@@ -15,8 +16,8 @@ const page = async ({ params }: Params) => {
     });
 
     if (!res.ok) {
-        // 데이터 없을 때
-        return <div className="p-10 font-bold">책을 찾을 수 없습니다.</div>;
+        // 글로벌 not-found.tsx 렌더링
+        notFound();
     }
 
     const book: Book = await res.json();
