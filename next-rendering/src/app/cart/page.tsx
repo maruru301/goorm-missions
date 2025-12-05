@@ -1,6 +1,6 @@
 // 장바구니 페이지
 
-import { deleteCartItems, getCartItems } from '../actions/cartActions';
+import { deleteCartItems, getCartItems, updateQuantity } from '../actions/cartActions';
 
 import Link from 'next/link';
 
@@ -29,6 +29,32 @@ const CartPage = async () => {
                             </div>
 
                             <div className="flex gap-4 items-center">
+                                <div className="flex items-center gap-2">
+                                    <form action={updateQuantity}>
+                                        <input type="hidden" name="id" value={item.id} />
+                                        <input type="hidden" name="quantity" value={item.quantity - 1} />
+                                        <button
+                                            type="submit"
+                                            className="px-3 py-1 text-sm rounded bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer"
+                                        >
+                                            -
+                                        </button>
+                                    </form>
+
+                                    <span>{item.quantity}개</span>
+
+                                    <form action={updateQuantity}>
+                                        <input type="hidden" name="id" value={item.id} />
+                                        <input type="hidden" name="quantity" value={item.quantity + 1} />
+                                        <button
+                                            type="submit"
+                                            className="px-3 py-1 text-sm rounded bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer"
+                                        >
+                                            +
+                                        </button>
+                                    </form>
+                                </div>
+
                                 <span>{Number(item.book?.price.amount).toLocaleString()}원</span>
 
                                 <form action={deleteCartItems}>
