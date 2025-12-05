@@ -7,6 +7,7 @@ import Link from 'next/link';
 const CartPage = async () => {
     const cartItems = await getCartItems();
 
+    const totalQuantity = cartItems.reduce((sum, item) => sum + Number(item.quantity), 0);
     const totalPrice = cartItems.reduce((sum, item) => sum + Number(item.book?.price.amount) * item.quantity, 0);
 
     return (
@@ -81,9 +82,16 @@ const CartPage = async () => {
                 <hr />
             </div>
 
-            <div className="flex justify-end gap-4 text-lg font-medium">
-                <span>총 금액:</span>
-                <span>{totalPrice.toLocaleString()}원</span>
+            <div className="flex text-lg font-medium flex-col items-end gap-2">
+                <div className="flex gap-4">
+                    <span>총 개수: </span>
+                    <span>{totalQuantity}개</span>
+                </div>
+
+                <div className="flex gap-4">
+                    <span>총 금액:</span>
+                    <span>{totalPrice.toLocaleString()}원</span>
+                </div>
             </div>
         </div>
     );
