@@ -104,18 +104,13 @@
   ],
   "cart": [
     {
-      "id": 1,
+      "id": "4f07",
       "bookId": 1,
       "quantity": 1
     },
     {
-      "id": 2,
-      "bookId": 2,
-      "quantity": 1
-    },
-    {
-      "id": 5,
-      "bookId": 5,
+      "id": "7e94",
+      "bookId": 4,
       "quantity": 1
     }
   ]

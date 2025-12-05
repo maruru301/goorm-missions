@@ -1,7 +1,8 @@
 // 장바구니 페이지
 
+import { deleteCartItems, getCartItems } from '../actions/cartActions';
+
 import Link from 'next/link';
-import { getCartItems } from '../actions/cartActions';
 
 const CartPage = async () => {
     const cartItems = await getCartItems();
@@ -19,7 +20,7 @@ const CartPage = async () => {
                     {cartItems.map((item) => (
                         <li key={item.id} className="border p-6 flex justify-between">
                             <div>
-                                <Link href={`/books/${item.id}`}>
+                                <Link href={`/books/${item.bookId}`}>
                                     <h3 className="text-lg font-semibold hover:underline cursor-pointer">
                                         {item.book?.title}
                                     </h3>
@@ -30,9 +31,16 @@ const CartPage = async () => {
                             <div className="flex gap-4 items-center">
                                 <span>{Number(item.book?.price.amount).toLocaleString()}원</span>
 
-                                <button className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors cursor-pointer">
-                                    삭제
-                                </button>
+                                <form action={deleteCartItems}>
+                                    <input type="hidden" name="id" value={item.id} />
+
+                                    <button
+                                        type="submit"
+                                        className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors cursor-pointer"
+                                    >
+                                        삭제
+                                    </button>
+                                </form>
                             </div>
                         </li>
                     ))}

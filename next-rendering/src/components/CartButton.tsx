@@ -12,7 +12,10 @@ const CartButton = ({ book }: Props) => {
             <input type="hidden" name="bookId" value={book.id} />
             <input type="hidden" name="quantity" value={1} />
 
-            <button className="font-medium text-sm text-white px-3 py-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer">
+            <button
+                type="submit"
+                className="font-medium text-sm text-white px-3 py-2 rounded bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer"
+            >
                 <div className="flex items-center justify-center gap-2">
                     <BsCartPlus className="w-4 h-4" />
                     장바구니 담기
