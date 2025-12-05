@@ -7,7 +7,7 @@ import Link from 'next/link';
 const CartPage = async () => {
     const cartItems = await getCartItems();
 
-    const totalPrice = cartItems.reduce((sum, item) => sum + Number(item.book?.price.amount), 0);
+    const totalPrice = cartItems.reduce((sum, item) => sum + Number(item.book?.price.amount) * item.quantity, 0);
 
     return (
         <div className="p-20">
