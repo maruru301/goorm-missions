@@ -1,7 +1,8 @@
 // 장바구니 페이지
 
-import { deleteCartItems, getCartItems, updateQuantity } from '../actions/cartActions';
+import { getCartItems, updateQuantity } from '../actions/cartActions';
 
+import DeleteButton from '@/components/DeleteButton';
 import Link from 'next/link';
 
 const CartPage = async () => {
@@ -62,16 +63,7 @@ const CartPage = async () => {
 
                                 <span>{Number(item.book?.price.amount).toLocaleString()}원</span>
 
-                                <form action={deleteCartItems}>
-                                    <input type="hidden" name="id" value={item.id} />
-
-                                    <button
-                                        type="submit"
-                                        className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors cursor-pointer"
-                                    >
-                                        삭제
-                                    </button>
-                                </form>
+                                <DeleteButton itemId={item.id} />
                             </div>
                         </li>
                     ))}
