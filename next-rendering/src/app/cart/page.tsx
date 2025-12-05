@@ -32,7 +32,11 @@ const CartPage = async () => {
                                 <div className="flex items-center gap-2">
                                     <form action={updateQuantity}>
                                         <input type="hidden" name="id" value={item.id} />
-                                        <input type="hidden" name="quantity" value={item.quantity - 1} />
+                                        <input
+                                            type="hidden"
+                                            name="quantity"
+                                            value={item.quantity > 1 ? item.quantity - 1 : 1}
+                                        />
                                         <button
                                             type="submit"
                                             className="px-3 py-1 text-sm rounded bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer"
