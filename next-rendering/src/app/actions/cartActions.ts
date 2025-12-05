@@ -70,6 +70,8 @@ export const updateQuantity = async (formData: FormData) => {
     const id = formData.get('id');
     const quantity = Number(formData.get('quantity'));
 
+    if (quantity < 1) return;
+
     const res = await fetch(`${BASE_URL}/cart/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },

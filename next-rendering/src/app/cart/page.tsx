@@ -41,7 +41,12 @@ const CartPage = async () => {
                                         />
                                         <button
                                             type="submit"
-                                            className="px-3 py-1 text-sm rounded bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer"
+                                            disabled={item.quantity <= 1}
+                                            className={`px-3 py-1 text-sm rounded transition-colors ${
+                                                item.quantity <= 1
+                                                    ? 'bg-gray-800 opacity-70'
+                                                    : 'bg-gray-700 hover:bg-gray-600 cursor-pointer'
+                                            }`}
                                         >
                                             -
                                         </button>
