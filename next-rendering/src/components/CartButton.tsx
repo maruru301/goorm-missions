@@ -1,3 +1,5 @@
+'use client';
+
 import { Book } from '@/types/book';
 import { BsCartPlus } from 'react-icons/bs';
 import { addToCart } from '@/app/actions/cartActions';
@@ -7,8 +9,21 @@ type Props = {
 };
 
 const CartButton = ({ book }: Props) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const result = await addToCart(formData);
+
+        if (result.success) {
+            alert(result.message); // 성공 메시지
+        } else {
+            alert(result.message); // 실패 메시지
+        }
+    };
+
     return (
-        <form action={addToCart}>
+        <form onSubmit={handleSubmit}>
             <input type="hidden" name="bookId" value={book.id} />
             <input type="hidden" name="quantity" value={1} />
 

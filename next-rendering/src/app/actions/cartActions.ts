@@ -26,6 +26,15 @@ export const addToCart = async (formData: FormData) => {
     const bookId = Number(formData.get('bookId'));
     const quantity = Number(formData.get('quantity'));
 
+    const cartRes = await fetch(`${BASE_URL}/cart`, { cache: 'no-store' });
+    const cart: CartItem[] = await cartRes.json();
+
+    const existing = cart.find((item) => item.bookId === bookId); // 중복 확인
+
+    if (existing) {
+        return { success: false, message: '이미 장바구니에 있는 책입니다.' };
+    }
+
     const res = await fetch(`${BASE_URL}/cart`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -34,9 +43,11 @@ export const addToCart = async (formData: FormData) => {
 
     if (!res.ok) {
         console.error('장바구니 추가 실패:', await res.text());
+        return { success: false, message: '장바구니 추가 실패' };
     }
 
     revalidatePath('/cart'); // 장바구니 페이지 갱신
+    return { success: true, message: '장바구니에 추가되었습니다.' };
 };
 
 // 장바구니 삭제

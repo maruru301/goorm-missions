@@ -106,11 +106,16 @@
     {
       "id": "4f07",
       "bookId": 1,
-      "quantity": 3
+      "quantity": 1
     },
     {
       "id": "7e94",
       "bookId": 4,
+      "quantity": 2
+    },
+    {
+      "id": "a704",
+      "bookId": 5,
       "quantity": 1
     }
   ]
