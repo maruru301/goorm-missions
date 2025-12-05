@@ -1,5 +1,6 @@
 // 책 상세 페이지 (SSR)
 
+import { BASE_URL } from '@/app/constants/api';
 import { Book } from '@/types/book';
 import CartButton from '@/components/CartButton';
 import { notFound } from 'next/navigation';
@@ -11,7 +12,7 @@ type Params = {
 const page = async ({ params }: Params) => {
     const { id } = await params;
 
-    const res = await fetch(`http://localhost:4000/books/${id}`, {
+    const res = await fetch(`${BASE_URL}/books/${id}`, {
         cache: 'no-store', // 매 요청마다 새로 가져오기
     });
 

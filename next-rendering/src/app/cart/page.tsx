@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { BASE_URL } from '../constants/api';
 import { Book } from '@/types/book';
 import Link from 'next/link';
 
@@ -12,7 +13,7 @@ const CartPage = () => {
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const res = await fetch('http://localhost:4000/cart');
+                const res = await fetch(`${BASE_URL}/cart`);
 
                 const data: Book[] = await res.json();
                 setCartList(data);
@@ -30,7 +31,7 @@ const CartPage = () => {
         if (!confirm) return;
 
         try {
-            const res = await fetch(`http://localhost:4000/cart/${id}`, {
+            const res = await fetch(`${BASE_URL}/cart/${id}`, {
                 method: 'DELETE',
             });
             if (!res.ok) throw new Error('삭제 실패');

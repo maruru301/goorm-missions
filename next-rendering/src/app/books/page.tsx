@@ -1,12 +1,13 @@
 // 책 목록 페이지 (ISR)
 
+import { BASE_URL } from '../constants/api';
 import { Book } from '@/types/book';
 import CartButton from '@/components/CartButton';
 import Link from 'next/link';
 import { MdInfoOutline } from 'react-icons/md';
 
 const page = async () => {
-    const res = await fetch('http://localhost:4000/books', {
+    const res = await fetch(`${BASE_URL}/books`, {
         next: { revalidate: 10 }, // 10초마다 백그라운드에서 재생성
     });
     const books: Book[] = await res.json();
